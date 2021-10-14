@@ -1,0 +1,6 @@
+locust
+requests
+har2tavern>=0.0.2
+gevent
+pyquery
+pyyaml

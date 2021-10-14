@@ -1,0 +1,138 @@
+Metadata-Version: 2.1
+Name: har2tavern
+Version: 0.0.2
+Summary: Generate yaml test cese from HAR file
+Home-page: https://github.com/dongfangtianyu/har2tavern
+Author: dongfangtianyu
+License: UNKNOWN
+Description: # HAR2tavern
+        
+        [tavern](https://github.com/taverntesting/tavern) 是一个pytest插件，用来进行接口自动化测试，通过**YAML**来描述和管理测试用例。
+        尽管YAML已经十分简洁，但是的接口数量很多时，创建YAML文件依然耗时。
+        
+        本工具将通过抓包获取到的HAR文件，快速生成tavern所支持的YAML文件，实现快速进行接口自动化的目的。
+        
+        当然，你也可以对生成的YAML进行修改，以实现复杂业务的测试。
+        
+        
+        ## 安装
+        ```bash
+        pip install har2tavern
+        ```
+        
+        
+        
+        ## 使用
+        
+        1. 基本用法
+            ```bash
+            >har2tavern file.harhar2
+            
+            Output file: ./test_api_1.tavern.yaml
+            Output file: ./test_api_2.tavern.yaml
+            Output file: ./test_api_3.tavern.yaml
+            Output file: ./test_api_4.tavern.yaml
+            Output file: ./test_api_5.tavern.yaml
+            Output file: ./test_api_6.tavern.yaml
+            Output file: ./test_api_7.tavern.yaml
+            Successfully generated 7 files
+            
+            ```
+            本命令将生成多个yaml格式的测试用例
+            
+        2. 更多参数
+        
+            ```bash
+            >har2pytest --help
+            Usage: har2pytest [OPTIONS] HARFILE
+            根据har文件，生成yaml格式的接口自动化测试用例
+        
+            Options:
+              -H, --host TEXT            只为指定的host生成用例
+              -S, --single-file BOOLEAN  将用例合并到单个文件
+              --help                     Show this message and exit.
+            ```
+        
+        3. 生成requests代码
+            ```python
+            >har2requests file.harhar2
+        
+            import requests
+        
+            s = requests.Session()
+            resp_1 = s.request(
+                **{
+                    "method": "POST",
+                    "url": "http://127.0.0.1:8000/todo",
+                    "headers": {
+                        "Host": "127.0.0.1:8000",
+                        "Connection": "keep-alive",
+                        "Accept": "application/json, text/plain, */*",
+                        "Authorization": "Bearer 0OWgIous2pQjm2Z4aiT2X0HCt3BnuJnp6fVMVv0TpMpEfW8xL53UkzCFJcAlMEaB",
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36",
+                        "Content-Type": "application/json;charset=UTF-8",
+                        "Origin": "http://127.0.0.1:8000",
+                        "Sec-Fetch-Site": "same-origin",
+                        "Sec-Fetch-Mode": "cors",
+                        "Sec-Fetch-Dest": "empty",
+                        "Referer": "http://127.0.0.1:8000/static/index.html",
+                        "Accept-Encoding": "gzip, deflate, br",
+                    },
+                    "json": {"title": "2222", "is_done": False},
+                }
+            )
+            ```
+        
+        
+        
+        ## 开发
+        1. 获取源代码
+            ```bash
+            git clone https://github.com/dongfangtianyu/har2tavern.git
+            cd har2tavern
+            ```
+        2. 创建venv，并安装依赖
+            ```bash
+            python -m venv venv
+            source ~/venv/bin/activate
+            pip install -r requirements.txt
+            pre-commit install
+            ```
+        3. 执行测试、 执行检查
+            ```bash
+            pytest && pre-commit run --all-files
+            ```
+        
+            在写代码之前，要确定你获取的代码是没有问题的,所有先执行一次测试
+        
+        5. 开发代码
+            ```
+            coding....
+           ```
+            现在，你可以尽情的编码了。
+        
+        6. 执行测试 、 执行检查
+        
+            > 特别提醒你在提交代码之前，再次进行测试和检查
+            ```bash
+            pytest && pre-commit run --all-files
+            ```
+        
+        7. 打包
+        
+            ```
+            python setup.py sdist
+            ```
+            执行该命令将在 `./dist`目录下中生成安装包，可以分发、安装
+        
+        
+        
+        ## 贡献
+        
+        如果你对本工具有更好的想法，欢迎发起PR https://github.com/dongfangtianyu/har2tavern
+        
+        我们希望PR中有修改的描述、测试用例，并且所有用例全部测试通过。
+        
+Platform: UNKNOWN
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown

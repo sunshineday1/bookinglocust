@@ -1,0 +1,5 @@
+[console_scripts]
+har2locust = har2tavern.main:har2locust
+har2requests = har2tavern.main:har2requests
+har2tavern = har2tavern.main:main
+
